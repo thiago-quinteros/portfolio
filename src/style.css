@@ -1,0 +1,1128 @@
+/* ==========================================================================
+   PORTFOLIO MINIMALISTA CYBER WAVE - THIAGO QUINTEROS
+   Inspirado en la estética Cyber Purple / Retro-futurista
+   Optimizado para alto rendimiento y 100% Responsive
+   ========================================================================== */
+
+/* --- Variables Globales de Diseño --- */
+:root {
+  --bg-deep: #05020a;
+  --bg-card: rgba(13, 6, 25, 0.68);
+  --bg-card-hover: rgba(22, 10, 42, 0.78);
+  
+  --purple-neon: #a855f7;
+  --purple-bright: #c084fc;
+  --purple-light: #e9d5ff;
+  --purple-core: #7928ca;
+  --purple-dark: #3b0764;
+
+  --border-subtle: rgba(168, 85, 247, 0.22);
+  --border-glow: rgba(192, 132, 252, 0.6);
+  
+  --text-primary: #f8f7ff;
+  --text-secondary: #c4b5fd;
+  --text-muted: #9382b6;
+
+  --font-display: 'Syne', system-ui, -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-full: 9999px;
+
+  --hud-hidden-opacity: 0.05;
+
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Reseteo y Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--bg-deep);
+}
+
+/* Bloqueo estricto de scroll mientras el preloader está activo */
+html.preloader-lock,
+body.preloader-lock {
+  overflow: hidden !important;
+  height: 100vh !important;
+  touch-action: none !important;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Lienzo de Fondo y Resplandores --- */
+#bg-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.glow-overlay {
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 50% 15%, rgba(121, 40, 202, 0.16) 0%, transparent 60%),
+    radial-gradient(circle at 85% 80%, rgba(168, 85, 247, 0.14) 0%, transparent 50%),
+    radial-gradient(circle at 15% 75%, rgba(91, 33, 182, 0.14) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- Contenedor Principal --- */
+.portfolio-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 1.5rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: filter, opacity;
+}
+
+/* Efecto Blur y ocultamiento del contenido mientras el preloader está activo */
+html.preloader-lock .portfolio-container,
+body.preloader-lock .portfolio-container {
+  filter: blur(14px);
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+/* Cuando se salta el preloader (ej. volver de la web del CV), mostrar instantáneamente sin parpadeos */
+html.skip-preloader .portfolio-container,
+html.preloader-done .portfolio-container {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  filter: none !important;
+}
+
+html:not(.skip-preloader):not(.preloader-done) .portfolio-container {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Espacio superior para el botón HUD */
+.hud-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 0.2rem;
+}
+
+/* El Bento Grid y el Footer se desvanecen a la opacidad tenue definida por la variable */
+.bento-grid,
+.portfolio-footer {
+  transition: opacity 0.5s ease;
+}
+
+body.hud-hidden .bento-grid,
+body.hud-hidden .portfolio-footer {
+  opacity: var(--hud-hidden-opacity);
+  pointer-events: none;
+}
+
+/* Botón Superior para Ocultar / Mostrar Interfaz (Modo Zen / Vista de Fondo) */
+.hud-toggle-btn {
+  position: relative;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.35rem;
+  background: rgba(14, 7, 27, 0.75);
+  color: var(--text-primary);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(168, 85, 247, 0.2);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+}
+
+.hud-toggle-btn:hover {
+  background: rgba(22, 10, 42, 0.9);
+  border-color: #c084fc;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.7), 0 0 25px rgba(192, 132, 252, 0.55);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.hud-toggle-btn:active {
+  transform: translateY(0);
+}
+
+.hud-toggle-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--purple-bright);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.hud-toggle-btn:hover .hud-toggle-icon {
+  color: #38bdf8;
+  transform: scale(1.1);
+}
+
+body.hud-hidden .hud-toggle-btn {
+  background: rgba(20, 9, 38, 0.88);
+  border-color: rgba(56, 189, 248, 0.7);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4), 0 6px 25px rgba(0, 0, 0, 0.8);
+}
+
+/* --- Navegación / Header Superior (Cápsula Compacta y Centrada) --- */
+.top-nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 auto;
+  width: auto;
+  max-width: fit-content;
+  padding: 0.55rem 1.5rem;
+  background: rgba(14, 7, 27, 0.65);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  transition: var(--transition-smooth);
+}
+
+.top-nav:hover {
+  border-color: rgba(192, 132, 252, 0.5);
+  box-shadow: 0 6px 25px rgba(168, 85, 247, 0.25);
+}
+
+.nav-divider {
+  color: var(--purple-bright);
+  opacity: 0.6;
+  font-size: 0.85rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+}
+
+.sparkle {
+  color: var(--purple-bright);
+  font-size: 0.8rem;
+  animation: pulse-sparkle 3s infinite ease-in-out;
+}
+
+.location-badge {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  padding: 0.2rem 0.75rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.04em;
+}
+
+/* --- Malla Bento Grid --- */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* --- Regla Fundamental: TODOS LOS TEXTOS DE LAS CARDS VAN CENTRADOS --- */
+.card,
+.card-content,
+.card h1, .card h2, .card h3,
+.card p,
+.card span,
+.skill-item,
+.edu-item,
+.lang-box {
+  text-align: center;
+}
+
+/* --- Estilo Base de las Cards (Arquitectura Ultra Optimizada por GPU: 60 FPS sin Paint) --- */
+.card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  padding: 3.5px; /* Grosor visible del borde de luz exterior */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  overflow: hidden; /* Corta la rotación de los haces al perímetro redondeado de la card */
+  background: rgba(168, 85, 247, 0.25); /* Borde base de apoyo sutil */
+  border: none;
+  transform: translateZ(0);
+  will-change: transform;
+  contain: paint;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 1. Haz Superior: Inicia en la esquina superior izquierda (135deg) y gira en sentido horario (CW) */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 135deg,
+    transparent 0deg,
+    rgba(168, 85, 247, 0.15) 15deg,
+    #a855f7 35deg,
+    #38bdf8 52deg,
+    #ffffff 60deg,
+    #38bdf8 68deg,
+    rgba(168, 85, 247, 0.3) 85deg,
+    transparent 105deg,
+    transparent 360deg
+  );
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.8;
+  transform: translate(-50%, -50%) rotate(0deg) translateZ(0);
+  will-change: transform, opacity;
+  animation: neon-idle-pulse 3.5s ease-in-out infinite;
+  transition: opacity 0.3s ease;
+}
+
+/* 2. Haz Inferior: Inicia en la esquina inferior derecha (315deg) y gira en sentido antihorario (CCW) */
+.card::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 315deg,
+    transparent 0deg,
+    rgba(121, 40, 202, 0.15) 15deg,
+    #c084fc 35deg,
+    #00d4ff 52deg,
+    #ffffff 60deg,
+    #a855f7 68deg,
+    rgba(56, 189, 248, 0.3) 85deg,
+    transparent 105deg,
+    transparent 360deg
+  );
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.8;
+  transform: translate(-50%, -50%) rotate(0deg) translateZ(0);
+  will-change: transform, opacity;
+  animation: neon-idle-pulse 3.5s ease-in-out infinite 0.4s;
+  transition: opacity 0.3s ease;
+}
+
+/* Estado Hover: Los dos haces giran con rotación simétrica inversa por GPU a 60 FPS puros */
+.card:hover {
+  transform: translateY(-4px) translateZ(0);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.85),
+              0 0 25px rgba(168, 85, 247, 0.4);
+}
+
+.card:hover::before {
+  opacity: 1;
+  animation: neon-spin-cw 2.8s linear infinite;
+}
+
+.card:hover::after {
+  opacity: 1;
+  animation: neon-spin-ccw 2.8s linear infinite;
+}
+
+/* Adaptación geométrica especial para la Hero Card (Panorámica / Ultra Ancha) */
+.card-hero::before,
+.card-hero::after {
+  width: 450%;
+  aspect-ratio: 1 / 1;
+}
+
+/* Rotación simétrica Horaria (CW) manteniendo el centro absoluto geométrico */
+@keyframes neon-spin-cw {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translateZ(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) translateZ(0);
+  }
+}
+
+/* Rotación simétrica Antihoraria (CCW) manteniendo el centro absoluto geométrico */
+@keyframes neon-spin-ccw {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translateZ(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-360deg) translateZ(0);
+  }
+}
+
+/* Respiración en reposo suave sólo con opacity (Cero consumo de CPU/GPU) */
+@keyframes neon-idle-pulse {
+  0%, 100% {
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+.card-glow {
+  display: none; /* Desactivado para evitar sobrecostos gráficos */
+}
+
+/* Contenedor INTERNO (z-index: 2): Fondo sólido 100% opaco */
+.card-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: #0d0619; /* Fondo sólido oscuro original */
+  border-radius: calc(var(--radius-lg) - 3.5px);
+  padding: 2.2rem 2rem;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  transition: background 0.3s ease;
+}
+
+.card:hover .card-content {
+  background: #130822; /* Tono sutilmente refinado pero 100% opaco */
+}
+
+/* --- Badges / Etiquetas de Sección --- */
+.hero-tag,
+.card-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--purple-bright);
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  padding: 0.35rem 0.95rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+}
+
+.sparkle-mini {
+  font-size: 0.7rem;
+  color: var(--purple-light);
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  opacity: 0.9;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease, text-shadow 0.3s ease, color 0.3s ease;
+}
+
+/* Efecto HUD en Títulos: Al hacer hover sobre la tarjeta, el título se enciende digitalmente */
+.card:hover .card-title {
+  opacity: 1;
+  color: #ffffff;
+  text-shadow: 
+    0 0 10px rgba(168, 85, 247, 0.7),
+    0 0 20px rgba(56, 189, 248, 0.45),
+    0 0 2px #ffffff;
+}
+
+/* ==========================================================================
+   DISTRIBUCIÓN BENTO GRID (DESKTOP)
+   ========================================================================== */
+
+/* 1. HERO CARD: Ocupa las 12 columnas arriba con ancho estilizado y compacto */
+.card-hero {
+  grid-column: span 12;
+}
+
+.card-hero .card-content {
+  padding: 2.2rem 2rem 2.4rem;
+  background: #120722;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.card-hero:hover .card-content {
+  background: #170a2c;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.2vw, 2.85rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.15;
+  color: #ffffff;
+  text-shadow: 0 0 30px rgba(168, 85, 247, 0.45);
+  animation: hero-title-glitch-entry 3s ease-out infinite;
+  will-change: transform, text-shadow, filter;
+}
+
+/* Glitch Periódico (Dura ~0.4s de interferencia cada 3 segundos, manteniéndose fijo el resto del tiempo) */
+@keyframes hero-title-glitch-entry {
+  0% {
+    transform: translate(-3px, 1px) skewX(-2deg);
+    text-shadow: 
+      -3px 0 #00d4ff,
+      3px 0 #c084fc,
+      0 0 15px rgba(168, 85, 247, 0.8);
+    opacity: 0.7;
+    filter: brightness(1.4);
+  }
+  3% {
+    transform: translate(3px, -1px) skewX(2deg);
+    text-shadow: 
+      3px 0 #38bdf8,
+      -3px 0 #a855f7,
+      0 0 25px rgba(168, 85, 247, 0.9);
+    opacity: 1;
+  }
+  6% {
+    transform: translate(-2px, 0) skewX(-1deg);
+    text-shadow: 
+      -2px 0 #ffffff,
+      2px 0 #c084fc;
+    opacity: 0.85;
+  }
+  9% {
+    transform: translate(1px, -1px);
+    text-shadow: 
+      2px 0 #38bdf8,
+      -1px 0 #7928ca,
+      0 0 30px rgba(168, 85, 247, 0.6);
+    opacity: 0.95;
+  }
+  12% {
+    transform: translate(-0.5px, 0);
+    text-shadow: 
+      -1px 0 #c084fc,
+      0 0 25px rgba(168, 85, 247, 0.5);
+    opacity: 1;
+  }
+  15%, 100% {
+    transform: translate(0, 0) skewX(0);
+    text-shadow: 0 0 30px rgba(168, 85, 247, 0.45);
+    opacity: 1;
+    filter: none;
+  }
+}
+
+.hero-subtitle {
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--purple-bright);
+  text-transform: uppercase;
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.meta-separator {
+  color: var(--purple-neon);
+}
+
+/* Botones con estilo píldora brillante como en la referencia ("Get your passes") */
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+  width: 100%;
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%);
+  color: #ffffff;
+  border: 1px solid rgba(233, 213, 255, 0.4);
+  box-shadow: 0 4px 20px rgba(147, 51, 234, 0.45);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
+  box-shadow: 0 6px 28px rgba(168, 85, 247, 0.7);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(8px);
+}
+
+.btn-secondary:hover {
+  background: rgba(168, 85, 247, 0.18);
+  border-color: var(--border-glow);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+}
+
+/* 2. CARD PERFIL PROFESIONAL: 6 Columnas (50% en PC) */
+.card-profile {
+  grid-column: span 6;
+  height: 100%;
+}
+
+.profile-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 580px;
+}
+
+.highlight {
+  color: #ffffff;
+  font-weight: 600;
+  text-shadow: 0 0 12px rgba(168, 85, 247, 0.4);
+}
+
+/* 3. CARD IDIOMAS: 6 Columnas (50% en PC, Lado a lado con Perfil) */
+.card-languages {
+  grid-column: span 6;
+  height: 100%;
+}
+
+.languages-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 480px;
+}
+
+.lang-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(168, 85, 247, 0.18);
+  border-radius: var(--radius-md);
+  padding: 1.1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  transition: var(--transition-smooth);
+}
+
+.lang-box:hover {
+  border-color: rgba(192, 132, 252, 0.45);
+  background: rgba(168, 85, 247, 0.08);
+}
+
+.lang-name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+}
+
+.lang-level-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--purple-bright);
+  background: rgba(168, 85, 247, 0.18);
+  padding: 0.2rem 0.75rem;
+  border-radius: var(--radius-full);
+}
+
+.lang-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.lang-sublevels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
+  width: 100%;
+}
+
+.sublevel-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.sublevel-label {
+  color: var(--text-secondary);
+}
+
+.sublevel-val {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* 4. CARD HABILIDADES: 6 Columnas (50% en PC) */
+.card-skills {
+  grid-column: span 6;
+  height: 100%;
+}
+
+.card-skills .card-content {
+  padding-top: 1.4rem;
+  padding-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.skills-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.15rem;
+  width: 100%;
+  flex: 1;
+}
+
+.skill-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(168, 85, 247, 0.16);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  height: 100%;
+  transition: var(--transition-smooth);
+}
+
+.skill-item:hover {
+  border-color: rgba(192, 132, 252, 0.5);
+  background: rgba(168, 85, 247, 0.09);
+  transform: translateY(-2px);
+}
+
+.skill-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.skill-name {
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.skill-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--purple-light);
+  background: rgba(168, 85, 247, 0.25);
+  border: 1px solid rgba(192, 132, 252, 0.3);
+  padding: 0.15rem 0.65rem;
+  border-radius: var(--radius-full);
+}
+
+.skill-desc {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* 5. CARD FORMACIÓN ACADÉMICA: 6 Columnas (50% en PC, Lado a lado con Habilidades) */
+.card-education {
+  grid-column: span 6;
+  height: 100%;
+}
+
+.education-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  width: 100%;
+}
+
+.edu-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(168, 85, 247, 0.16);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  transition: var(--transition-smooth);
+}
+
+.edu-item:hover {
+  border-color: rgba(192, 132, 252, 0.45);
+  background: rgba(168, 85, 247, 0.08);
+}
+
+.edu-status-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--purple-bright);
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  padding: 0.15rem 0.7rem;
+  border-radius: var(--radius-full);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: border-color, box-shadow, filter;
+}
+
+.edu-status-tag.completed {
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.12);
+  border-color: rgba(74, 222, 128, 0.3);
+}
+
+/* Animación de Estados: Iluminación instantánea de micro-borde y resplandor al posar el cursor */
+.edu-item:hover .edu-status-tag {
+  color: #ffffff;
+  background: rgba(168, 85, 247, 0.32);
+  border-color: #c084fc;
+  box-shadow: 
+    0 0 10px rgba(192, 132, 252, 0.8),
+    0 0 1px 1px #ffffff inset;
+  filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.7));
+}
+
+.edu-item:hover .edu-status-tag.completed {
+  color: #ffffff;
+  background: rgba(74, 222, 128, 0.28);
+  border-color: #4ade80;
+  box-shadow: 
+    0 0 10px rgba(74, 222, 128, 0.8),
+    0 0 1px 1px #ffffff inset;
+  filter: drop-shadow(0 0 6px rgba(74, 222, 128, 0.7));
+}
+
+.edu-title {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.35;
+}
+
+.edu-detail {
+  font-size: 0.88rem;
+  color: var(--purple-light);
+}
+
+.edu-institution {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* --- Footer Minimalista --- */
+.portfolio-footer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.5rem 1rem;
+}
+
+.footer-sparkles {
+  color: var(--purple-bright);
+  letter-spacing: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.footer-text {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* --- Animaciones Suaves --- */
+@keyframes pulse-sparkle {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (PC -> TABLET -> ANDROID / MOBILE)
+   ========================================================================== */
+
+/* Tablet & Pantallas Medianas */
+@media (max-width: 992px) {
+  .portfolio-container {
+    padding: 1.8rem 1.2rem;
+    gap: 1.5rem;
+  }
+
+  .card-profile,
+  .card-languages,
+  .card-skills,
+  .card-education {
+    grid-column: span 12;
+  }
+
+  .skills-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Celulares Android / Pantallas Pequeñas */
+@media (max-width: 640px) {
+  .portfolio-container {
+    padding: 1.2rem 1rem 2.5rem;
+    gap: 1.2rem;
+  }
+
+  .top-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .bento-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .card-content {
+    padding: 1.8rem 1.2rem;
+  }
+
+  .card-hero .card-content {
+    padding: 2rem 1.2rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.8rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    max-width: 320px;
+    padding: 0.9rem 1.2rem;
+  }
+
+  .skills-list {
+    grid-template-columns: 1fr;
+  }
+
+  .sublevel-row {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+}
+
+/* Soporte de accesibilidad para preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   PRELOADER CYBERWAVE: CRT SYNTHWAVE DISPLAY
+   Efecto TV retro-futurista con escaneo, horizonte synthwave y glitch
+   ========================================================================== */
+
+/* Regla anti-parpadeo inmediata: Si ya se vio en la sesión, suprimirlo */
+html.skip-preloader #cyber-preloader {
+  display: none !important;
+}
+
+.cyber-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #07020f;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.5s ease;
+  pointer-events: all;
+  user-select: none;
+}
+
+/* Transición de salida suave hasta 0% de opacidad */
+.cyber-preloader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Contenedor adaptativo 100% Responsive manteniendo el aspect ratio nativo 16:9 (800x450) */
+.crt-preloader-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  max-height: 85vh;
+  aspect-ratio: 800 / 450;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.crt-svg-display {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   SUPRESIÓN DE WIDGETS Y EXTENSIONES EXTERNAS DE IA (Sider.ai, ChatGPT Sidebar)
+   Bloquea e ignora paneles flotantes de extensiones del navegador
+   ========================================================================== */
+#sider-container,
+#sider-sidebar,
+#sider-root,
+#sider-assistant,
+sider-sidebar,
+sider-app,
+[id*="sider-"],
+[class*="sider-"],
+[data-sider],
+#chatgpt-sidebar,
+#ch-sidebar,
+div[id^="ch-plugin-"],
+div[id^="sider-"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  clip-path: inset(100%) !important;
+  z-index: -9999 !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}

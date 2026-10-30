@@ -1,0 +1,552 @@
+/* ==========================================================================
+   HOJA DE ESTILOS CORPORATIVA / IMPRESIÓN (CSS PRINT) - THIAGO QUINTEROS
+   Enfocada en 1 sola página A4, distribución balanceada y filtros ATS.
+   ========================================================================== */
+
+/* --- Variables Corporativas --- */
+:root {
+  --bg-page: #ffffff;
+  --text-main: #0f172a;        /* Negro / Slate muy oscuro para máxima legibilidad ATS */
+  --text-muted: #475569;       /* Gris medio sobrio */
+  --text-light: #64748b;
+  --accent: #581c87;           /* Violeta sobrio / corporativo */
+  --accent-light: #7e22ce;
+  --accent-bg: #f5f3ff;        /* Fondo sutil lavanda para cápsulas */
+  --accent-border: #d8b4fe;    /* Borde sutil para tags */
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;      /* Borde sutil para tarjetas */
+  --line-divider: #e2e8f0;     /* Líneas divisorias delgadas */
+  
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* --- Reseteo Universal --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+  background-color: #f1f5f9;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-main);
+  background-color: #f1f5f9;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Barra superior de acciones en pantalla (Oculta en impresión) */
+.screen-actions-bar {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.bar-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.bar-badge {
+  background: #334155;
+  color: #38bdf8;
+  font-size: 0.72rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.bar-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.btn-print {
+  background: #7e22ce;
+  color: #ffffff;
+}
+
+.btn-print:hover {
+  background: #9333ea;
+  box-shadow: 0 2px 8px rgba(126, 34, 206, 0.4);
+}
+
+.btn-back {
+  background: transparent;
+  color: #cbd5e1;
+  border-color: #475569;
+}
+
+.btn-back:hover {
+  background: #1e293b;
+  color: #ffffff;
+}
+
+/* --- Hoja A4 para Vista en Pantalla --- */
+.page-sheet {
+  width: 210mm;
+  min-height: 297mm;
+  height: 297mm;
+  max-height: 297mm;
+  margin: 1.5rem auto 2.5rem;
+  padding: 12mm 15mm 10mm 15mm;
+  background: var(--bg-page);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+/* --- Cabecera Formal --- */
+.cv-header {
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 1rem;
+  margin-bottom: 1.15rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.header-left {
+  flex: 1;
+}
+
+.candidate-name {
+  font-size: 1.95rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--text-main);
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.candidate-role {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+}
+
+.candidate-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.45rem;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+}
+
+.contact-item {
+  color: var(--text-main);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 500;
+}
+
+.contact-item:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.icon-svg {
+  width: 14px;
+  height: 14px;
+  color: var(--accent);
+}
+
+.btn-header-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #ffffff;
+  background: var(--accent);
+  border: 1px solid var(--accent-border);
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.2rem;
+}
+
+.btn-header-pdf:hover {
+  background: var(--accent-light);
+}
+
+/* --- Estructura en Dos Columnas --- */
+.two-columns-layout {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 1.35rem;
+  flex: 1;
+}
+
+.col-left, .col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* --- Títulos de Sección ATS --- */
+.section-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  text-transform: uppercase;
+  border-bottom: 1.5px solid var(--line-divider);
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.85rem; /* Separación ampliada respecto al contenido inferior */
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.title-symbol {
+  font-size: 0.8rem;
+  color: var(--accent-light);
+  font-weight: 800;
+}
+
+/* --- 1. Perfil Profesional (Recuadro con margen interno para respiración) --- */
+.profile-paragraph {
+  font-size: 0.79rem;
+  line-height: 1.6;
+  color: var(--text-main);
+  text-align: justify;
+  background: #fbfbfd;
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  padding: 0.75rem 0.95rem; /* Padding interno superior e inferior ampliado */
+}
+
+.profile-paragraph strong {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* --- 2. Habilidades (Tarjetas con separación vertical y padding interno) --- */
+.skills-vertical-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem; /* Separación vertical entre cada una de las 6 habilidades */
+}
+
+.skill-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.16rem;
+  padding: 0.5rem 0.75rem; /* Margen interno arriba y abajo */
+  border: 1px solid var(--card-border);
+  border-radius: 5px;
+  background: var(--card-bg);
+}
+
+.skill-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.skill-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.skill-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  padding: 0.1rem 0.45rem;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.skill-desc {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  line-height: 1.36;
+}
+
+/* --- 3. Idiomas (Recuadros con espaciado vertical y padding interno) --- */
+.languages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Separación vertical entre idiomas */
+}
+
+.language-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  padding: 0.7rem 0.85rem; /* Margen interno arriba y abajo */
+  border: 1px solid var(--card-border);
+  border-radius: 5px;
+  background: var(--card-bg);
+}
+
+.lang-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lang-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.lang-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  padding: 0.1rem 0.45rem;
+  border-radius: 3px;
+}
+
+.lang-desc {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.lang-sublevels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+  background: #f8fafc;
+  padding: 0.4rem 0.6rem;
+  border-radius: 3px;
+  border-left: 3px solid var(--accent-border);
+}
+
+/* --- 4. Formación Académica (Recuadros con espaciado vertical y padding interno) --- */
+.education-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem; /* Separación vertical entre los 4 bloques de estudio */
+}
+
+.edu-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  padding: 0.55rem 0.85rem; /* Margen interno arriba y abajo calibrado */
+  border: 1px solid var(--card-border);
+  border-radius: 5px;
+  background: var(--card-bg);
+}
+
+.edu-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem;
+}
+
+.edu-degree {
+  font-size: 0.81rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+
+.edu-badge {
+  font-size: 0.66rem;
+  font-weight: 600;
+  padding: 0.08rem 0.42rem;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.edu-badge.in-progress {
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+}
+
+.edu-badge.completed {
+  color: #15803d;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
+.edu-institution {
+  font-size: 0.73rem;
+  color: var(--text-muted);
+}
+
+.edu-orientation {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* --- Pie de Documento --- */
+.cv-footer {
+  border-top: 1px solid var(--line-divider);
+  padding-top: 0.5rem;
+  margin-top: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  color: var(--text-light);
+}
+
+/* ==========================================================================
+   REGLAS DE IMPRESIÓN DIRECTA (@media print)
+   Garantiza 1 sola página A4 distribuida armónicamente de arriba a abajo
+   ========================================================================== */
+@page {
+  size: A4 portrait;
+  margin: 10mm 14mm 10mm 14mm;
+}
+
+@media print {
+  html, body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-size: 13.8px !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .screen-actions-bar,
+  .btn-header-pdf {
+    display: none !important;
+  }
+
+  .page-sheet {
+    width: 100% !important;
+    min-height: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .two-columns-layout {
+    gap: 1.35rem !important;
+    flex: 1 !important;
+  }
+
+  .col-left, .col-right {
+    gap: 1.3rem !important;
+  }
+
+  .candidate-name {
+    color: #000000 !important;
+  }
+
+  .candidate-role,
+  .section-title {
+    color: #4a044e !important;
+  }
+
+  .profile-paragraph,
+  .skill-row,
+  .language-item,
+  .edu-entry {
+    border: 1px solid #cbd5e1 !important;
+    background: #ffffff !important;
+    page-break-inside: avoid !important;
+  }
+
+  .skill-tag,
+  .lang-tag,
+  .edu-badge {
+    border: 1px solid #cbd5e1 !important;
+    background: #f8fafc !important;
+    color: #1e1b4b !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+}

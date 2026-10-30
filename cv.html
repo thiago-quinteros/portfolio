@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TQ - Currículum Vitae (A4)</title>
+  <meta name="description" content="Currículum Vitae profesional de Thiago Quinteros - Informática & Eficiencia Operativa.">
+  
+  <!-- Tipografía moderna y formal para ATS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/src/print-cv.css">
+  <!-- Script y estilos de supresión de extensiones IA y prevención de parpadeo blanco -->
+  <style>
+    html, body {
+      background-color: #f1f5f9 !important;
+      margin: 0;
+      padding: 0;
+    }
+    
+    sider-sidebar,
+    sider-app,
+    #sider-container,
+    #sider-sidebar,
+    #sider-root,
+    [id*="sider"],
+    [class*="sider"],
+    [data-sider],
+    #chatgpt-sidebar {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      position: absolute !important;
+      top: -99999px !important;
+      left: -99999px !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de acciones en pantalla (se oculta automáticamente al imprimir o guardar en PDF) -->
+  <nav class="screen-actions-bar" aria-label="Acciones del Currículum">
+    <div class="bar-info">
+      <span>Vista Previa de Currículum Formal</span>
+      <span class="bar-badge">1 PÁGINA A4 • ATS-FRIENDLY</span>
+    </div>
+    <div class="bar-buttons">
+      <a href="/index.html" class="btn-action btn-back">
+        <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"></line>
+          <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        <span>Volver a la Web</span>
+      </a>
+      <button onclick="window.print()" class="btn-action btn-print">
+        <svg class="icon-svg" style="color: #ffffff;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        <span>Descargar / Imprimir PDF</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hoja A4 estricta de 1 sola página -->
+  <div class="page-sheet">
+
+    <!-- CABECERA PRINCIPAL -->
+    <header class="cv-header">
+      <div class="header-left">
+        <h1 class="candidate-name">THIAGO QUINTEROS</h1>
+        <p class="candidate-role">INFORMÁTICA &amp; EFICIENCIA OPERATIVA</p>
+        <div class="candidate-meta">
+          <span>Berisso, Buenos Aires, Argentina</span>
+          <span>•</span>
+          <span>Nacimiento: 20/11/2006 (19 años)</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <div class="contact-links">
+          <a href="tel:+5492216189364" class="contact-item" title="Llamar o enviar mensaje">
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span>+54 9 221 618-9364</span>
+          </a>
+          <a href="mailto:thiagoqfacultad@gmail.com" class="contact-item" title="Enviar correo">
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+            <span>thiagoqfacultad@gmail.com</span>
+          </a>
+        </div>
+        <!-- Botón funcional y visible para descargar el CV en PDF -->
+        <button onclick="window.print()" class="btn-header-pdf" title="Descargar este Currículum en PDF">
+          <svg class="icon-svg" style="color: #ffffff; width: 12px; height: 12px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          <span>Descargar PDF</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- CUERPO PRINCIPAL: DISTRIBUCIÓN EN DOS COLUMNAS -->
+    <main class="two-columns-layout">
+
+      <!-- COLUMNA IZQUIERDA: PERFIL Y HABILIDADES -->
+      <div class="col-left">
+
+        <!-- SECCIÓN: PERFIL PROFESIONAL -->
+        <section class="section-block">
+          <h2 class="section-title">
+            <span class="title-symbol">+</span> OBJETIVO &amp; TRAYECTORIA
+          </h2>
+          <p class="profile-paragraph">
+            Bachiller con un perfil técnico enfocado en la <strong>eficiencia operativa</strong> y la <strong>informática</strong>. Me destaco por mi alta velocidad y precisión en el procesamiento de información, rigurosidad en el control de calidad de datos y capacidad para estructurar archivos de forma lógica. Cuento con autonomía para diagnosticar y resolver fallas tecnológicas del día a día, agilizar procesos mediante herramientas del sistema y garantizar la protección de los entornos digitales de trabajo. Siempre dispuesto a aprender, actualizar mis habilidades y asumir nuevos desafíos técnicos en mi día a día.
+          </p>
+        </section>
+
+        <!-- SECCIÓN: HABILIDADES -->
+        <section class="section-block">
+          <h2 class="section-title">
+            <span class="title-symbol">+</span> COMPETENCIAS CLAVE
+          </h2>
+
+          <div class="skills-vertical-list">
+
+            <!-- 1. Mecanografía al tacto -->
+            <article class="skill-row">
+              <div class="skill-top">
+                <span class="skill-name">Mecanografía al tacto</span>
+                <span class="skill-tag">60–80 PPM | +95% precisión</span>
+              </div>
+              <p class="skill-desc">Velocidad, ritmo fluido y mínima tasa de error en carga de datos.</p>
+            </article>
+
+            <!-- 2. Atención al detalle -->
+            <article class="skill-row">
+              <div class="skill-top">
+                <span class="skill-name">Atención al detalle</span>
+                <span class="skill-tag">Precisión métrica</span>
+              </div>
+              <p class="skill-desc">Detección precisa de errores, verificación y control de calidad de datos.</p>
+            </article>
+
+            <!-- 3. Organización digital -->
+            <article class="skill-row">
+              <div class="skill-top">
+                <span class="skill-name">Organización digital</span>
+                <span class="skill-tag">Gestión documental</span>
+              </div>
+              <p class="skill-desc">Estructuración lógica de archivos y carpetas para un acceso rápido y ordenado.</p>
+            </article>
+
+            <!-- 4. Soporte técnico básico -->
+            <article class="skill-row">
+              <div class="skill-top">
+                <span class="skill-name">Soporte técnico básico</span>
+                <span class="skill-tag">Help Desk</span>
+              </div>
+              <p class="skill-desc">Resolución autónoma de problemas de hardware, software y conectividad.</p>
+            </article>
+
+            <!-- 5. Optimización del SO -->
+            <article class="skill-row">
+              <div class="skill-top">
+                <span class="skill-name">Optimización del SO</span>
+                <span class="skill-tag">Productividad ágil</span>
+              </div>
+              <p class="skill-desc">Uso eficiente de atajos y comandos del sistema para optimizar tiempos.</p>
+            </article>
+
+            <!-- 6. Ciberseguridad básica -->
+            <article class="skill-row">
+              <div class="skill-top">
+                <span class="skill-name">Ciberseguridad básica</span>
+                <span class="skill-tag">Prevención de riesgos</span>
+              </div>
+              <p class="skill-desc">Mitigación de malware, detección de enlaces sospechosos y navegación segura.</p>
+            </article>
+
+          </div>
+        </section>
+
+      </div>
+
+      <!-- COLUMNA DERECHA: IDIOMAS Y FORMACIÓN ACADÉMICA -->
+      <div class="col-right">
+
+        <!-- SECCIÓN: IDIOMAS -->
+        <section class="section-block">
+          <h2 class="section-title">
+            <span class="title-symbol">+</span> DOMINIO LINGÜÍSTICO
+          </h2>
+
+          <div class="languages-list">
+            <div class="language-item">
+              <div class="lang-header">
+                <span class="lang-title">Español</span>
+                <span class="lang-tag">Nativo</span>
+              </div>
+              <p class="lang-desc">Lengua materna con excelente redacción y ortografía.</p>
+            </div>
+
+            <div class="language-item">
+              <div class="lang-header">
+                <span class="lang-title">Inglés</span>
+                <span class="lang-tag">Básico / Pre-Intermedio</span>
+              </div>
+              <div class="lang-sublevels">
+                <div><strong>Comprensión lectora:</strong> B1 (Intermedio)</div>
+                <div><strong>Expresión oral y escrita:</strong> A2 (Elemental)</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECCIÓN: FORMACIÓN ACADÉMICA -->
+        <section class="section-block">
+          <h2 class="section-title">
+            <span class="title-symbol">+</span> ESTUDIOS &amp; CAPACITACIONES
+          </h2>
+
+          <div class="education-list">
+
+            <!-- 1. Programación Web y Base de Datos (En curso - Morado) -->
+            <article class="edu-entry">
+              <div class="edu-header">
+                <h3 class="edu-degree">Programación Web y Administración en BD</h3>
+                <span class="edu-badge in-progress">En Curso</span>
+              </div>
+              <p class="edu-institution">Centro de Formación Laboral (CFL 404)</p>
+            </article>
+
+            <!-- 2. Reparación de PC (En curso - Morado) -->
+            <article class="edu-entry">
+              <div class="edu-header">
+                <h3 class="edu-degree">Reparación de PC</h3>
+                <span class="edu-badge in-progress">En Curso</span>
+              </div>
+              <p class="edu-institution">Centro de Formación Laboral (CFL 404)</p>
+            </article>
+
+            <!-- 3. Programación IoT (2025) (Finalizado - Verde) -->
+            <article class="edu-entry">
+              <div class="edu-header">
+                <h3 class="edu-degree">Programación IoT (2025)</h3>
+                <span class="edu-badge completed">Finalizado</span>
+              </div>
+              <p class="edu-orientation">Fundamentos básicos de conectividad, lógica de sistemas y automatización básica.</p>
+              <p class="edu-institution">Centro de Formación Laboral (CFL 404)</p>
+            </article>
+
+            <!-- 4. Secundario Completo (Finalizado - Verde) -->
+            <article class="edu-entry">
+              <div class="edu-header">
+                <h3 class="edu-degree">Secundario Completo</h3>
+                <span class="edu-badge completed">Finalizado</span>
+              </div>
+              <p class="edu-orientation">Orientación: Ciencias Naturales</p>
+              <p class="edu-institution">E.E.S. Nº 2 (2020 – 2024)</p>
+            </article>
+
+          </div>
+        </section>
+
+      </div>
+
+    </main>
+
+    <!-- PIE DISCRETO -->
+    <footer class="cv-footer">
+      <span>Thiago Quinteros — Currículum Vitae</span>
+      <span>Documento optimizado para sistemas ATS • Página 1 de 1</span>
+    </footer>
+
+  </div>
+
+</body>
+</html>

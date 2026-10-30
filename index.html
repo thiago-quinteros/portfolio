@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TQ | Portfolio Profesional</title>
+  <meta name="description" content="Portfolio profesional de Thiago Quinteros - Perfil técnico en informática, eficiencia operativa y soporte.">
+
+  <!-- Preload crítico del Preloader SVG para ejecución instantánea sin tirones -->
+  <link rel="preload" href="/crt-vk2lpc.svg" as="image" type="image/svg+xml" fetchpriority="high">
+
+  <!-- Google Fonts: Syne (Titulares modernos/futuristas) + Plus Jakarta Sans (Cuerpo y detalles legibles) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Script anti-parpadeo y control de navegación limpia -->
+  <script>
+    // Si ya se vio el preloader en esta sesión o se recarga con F5, se salta instantáneamente
+    // mostrando directamente la página del portfolio sin repetir la pantalla de carga:
+    if (sessionStorage.getItem('cyber_preloader_seen')) {
+      document.documentElement.classList.add('skip-preloader');
+      document.documentElement.classList.add('preloader-done');
+    }
+    // Bloqueador inmediato de widgets de extensiones de IA antes de que se monte el body
+    (function killSiderImmediate() {
+      const observer = new MutationObserver((mutations) => {
+        for (const m of mutations) {
+          for (const node of m.addedNodes) {
+            if (node.nodeType === 1) {
+              const tag = node.tagName.toLowerCase();
+              const id = (node.id || '').toLowerCase();
+              const cls = (typeof node.className === 'string' ? node.className : '').toLowerCase();
+              if (
+                tag.includes('sider') ||
+                id.includes('sider') ||
+                cls.includes('sider') ||
+                id.includes('chatgpt') ||
+                tag.includes('chatgpt') ||
+                node.hasAttribute('data-sider') ||
+                node.shadowRoot
+              ) {
+                if (!node.closest('#cyber-preloader') && !node.closest('.portfolio-container')) {
+                  node.remove();
+                }
+              }
+            }
+          }
+        }
+      });
+      observer.observe(document.documentElement, { childList: true, subtree: true });
+    })();
+  </script>
+  <style>
+    /* Prevención FOUC inmediata: fondo oscuro instantáneo y ocultamiento de la UI detrás del preloader */
+    html, body {
+      background-color: #05020a !important;
+      margin: 0;
+      padding: 0;
+    }
+
+    html:not(.skip-preloader):not(.preloader-done) .portfolio-container {
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    /* Ocultamiento instantáneo en cabeza de documento contra extensiones del navegador */
+    sider-sidebar,
+    sider-app,
+    #sider-container,
+    #sider-sidebar,
+    #sider-root,
+    #sider-assistant,
+    [id*="sider"],
+    [class*="sider"],
+    [data-sider],
+    #chatgpt-sidebar,
+    #ch-sidebar,
+    div[id^="ch-plugin-"] {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      position: absolute !important;
+      top: -99999px !important;
+      left: -99999px !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Preloader Futurista: CRT Synthwave / Cyberwave -->
+  <aside id="cyber-preloader" class="cyber-preloader" aria-label="Cargando interfaz">
+    <div class="crt-preloader-wrapper">
+      <img src="/crt-vk2lpc.svg" alt="Cargando entorno digital" class="crt-svg-display" />
+    </div>
+  </aside>
+
+  <!-- Fondo animado interactivo y de alto rendimiento -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="glow-overlay" aria-hidden="true"></div>
+
+  <!-- Contenedor principal del Bento Grid -->
+  <div class="portfolio-container">
+
+    <!-- Barra de Control Superior HUD (Espacio dedicado arriba del todo) -->
+    <header class="hud-top-bar">
+      <button id="hud-toggle" class="hud-toggle-btn" type="button" aria-label="Alternar visibilidad de interfaz" title="Ocultar / Mostrar interfaz para ver el fondo">
+        <svg class="hud-toggle-icon icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        <svg class="hud-toggle-icon icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: none;">
+          <path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+          <path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+          <path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+          <line x1="2" y1="2" x2="22" y2="22"></line>
+        </svg>
+        <span class="hud-toggle-label">Ocultar HUD</span>
+      </button>
+    </header>
+
+    <!-- Bento Grid -->
+    <main class="bento-grid">
+
+      <!-- CARD 1: HERO / PRESENTACIÓN PERSONAL -->
+      <section class="card card-hero">
+        <div class="card-glow" aria-hidden="true"></div>
+        <div class="card-content">
+          <div class="hero-tag">
+            <span class="sparkle-mini">✦</span>
+            <span>PORTFOLIO TÉCNICO</span>
+            <span class="sparkle-mini">✦</span>
+          </div>
+
+          <h1 class="hero-title">THIAGO QUINTEROS</h1>
+          <p class="hero-subtitle">INFORMÁTICA & EFICIENCIA OPERATIVA</p>
+
+          <div class="hero-meta">
+            <span class="meta-item">Nacimiento: 20/11/2006</span>
+            <span class="meta-separator">•</span>
+            <span class="meta-item">Berisso - Argentina</span>
+          </div>
+
+          <!-- Botones de contacto directo y descarga de CV -->
+          <div class="hero-actions">
+            <a href="/cv.html" class="btn-primary" style="background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);" title="Ver y descargar Currículum en PDF Formal A4">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Descargar CV (PDF)</span>
+            </a>
+
+            <a href="https://wa.me/5492216189364" target="_blank" rel="noopener noreferrer" class="btn-secondary" title="Enviar WhatsApp a Thiago Quinteros">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <span>+54 9 221 618-9364</span>
+            </a>
+
+            <a href="mailto:thiagoqfacultad@gmail.com" class="btn-secondary" title="Enviar correo a Thiago Quinteros">
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+              </svg>
+              <span>thiagoqfacultad@gmail.com</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARD 2: PERFIL PROFESIONAL -->
+      <section class="card card-profile">
+        <div class="card-glow" aria-hidden="true"></div>
+        <div class="card-content">
+          <div class="card-badge">
+            <span class="sparkle-mini">✦</span>
+            <span>OBJETIVO & TRAYECTORIA</span>
+          </div>
+
+          <h2 class="card-title">PERFIL PROFESIONAL</h2>
+
+          <p class="profile-text">
+            Bachiller con un perfil técnico enfocado en la eficiencia operativa y la Informática. Me destaco por mi alta velocidad y precisión en el procesamiento de información, rigurosidad en el control de calidad de datos y capacidad para estructurar archivos de forma lógica. Cuento con autonomía para diagnosticar y resolver fallas tecnológicas del día a día, agilizar procesos mediante herramientas del sistema y garantizar la protección de los entornos digitales de trabajo. Siempre dispuesto a aprender, actualizar mis habilidades y asumir nuevos desafíos técnicos en mi día a día.
+          </p>
+        </div>
+      </section>
+
+      <!-- CARD 3: IDIOMAS (Lado a lado con Perfil Profesional) -->
+      <section class="card card-languages">
+        <div class="card-glow" aria-hidden="true"></div>
+        <div class="card-content">
+          <div class="card-badge">
+            <span class="sparkle-mini">✦</span>
+            <span>DOMINIO LINGÜÍSTICO</span>
+          </div>
+
+          <h2 class="card-title">IDIOMAS</h2>
+
+          <div class="languages-grid">
+            <div class="lang-box">
+              <h3 class="lang-name">Español</h3>
+              <span class="lang-level-badge">Nativo</span>
+              <p class="lang-note">Lengua materna con excelente redacción y ortografía.</p>
+            </div>
+
+            <div class="lang-box">
+              <h3 class="lang-name">Inglés</h3>
+              <span class="lang-level-badge">Básico / Pre-Intermedio</span>
+              <div class="lang-sublevels">
+                <div class="sublevel-row">
+                  <span class="sublevel-label">Comprensión lectora:</span>
+                  <span class="sublevel-val">B1 (Intermedio)</span>
+                </div>
+                <div class="sublevel-row">
+                  <span class="sublevel-label">Expresión oral y escrita:</span>
+                  <span class="sublevel-val">A2 (Elemental)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARD 4: HABILIDADES TÉCNICAS -->
+      <section class="card card-skills">
+        <div class="card-glow" aria-hidden="true"></div>
+        <div class="card-content">
+          <div class="card-badge">
+            <span class="sparkle-mini">✦</span>
+            <span>COMPETENCIAS CLAVE</span>
+          </div>
+
+          <h2 class="card-title">HABILIDADES</h2>
+
+          <div class="skills-list">
+            <article class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Mecanografía al tacto</span>
+                <span class="skill-tag">60-80 PPM | +95% precisión</span>
+              </div>
+              <p class="skill-desc">Velocidad, ritmo fluido y mínima tasa de error en carga de datos.</p>
+            </article>
+
+            <article class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Atención al detalle</span>
+                <span class="skill-tag">Precisión métrica</span>
+              </div>
+              <p class="skill-desc">Detección precisa de errores, verificación y control de calidad de datos.</p>
+            </article>
+
+            <article class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Organización digital</span>
+                <span class="skill-tag">Gestión documental</span>
+              </div>
+              <p class="skill-desc">Estructuración lógica de archivos y carpetas para un acceso rápido y ordenado.</p>
+            </article>
+
+            <article class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Soporte técnico básico</span>
+                <span class="skill-tag">Help Desk</span>
+              </div>
+              <p class="skill-desc">Resolución autónoma de problemas de hardware, software y conectividad.</p>
+            </article>
+
+            <article class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Optimización del SO</span>
+                <span class="skill-tag">Productividad ágil</span>
+              </div>
+              <p class="skill-desc">Uso eficiente de atajos y comandos del sistema para optimizar tiempos.</p>
+            </article>
+
+            <article class="skill-item">
+              <div class="skill-header">
+                <span class="skill-name">Ciberseguridad básica</span>
+                <span class="skill-tag">Prevención de riesgos</span>
+              </div>
+              <p class="skill-desc">Mitigación de malware, detección de enlaces sospechosos y navegación segura.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CARD 5: FORMACIÓN ACADÉMICA (Lado a lado con Habilidades) -->
+      <section class="card card-education">
+        <div class="card-glow" aria-hidden="true"></div>
+        <div class="card-content">
+          <div class="card-badge">
+            <span class="sparkle-mini">✦</span>
+            <span>ESTUDIOS & CAPACITACIONES</span>
+          </div>
+
+          <h2 class="card-title">FORMACIÓN ACADÉMICA</h2>
+
+          <div class="education-timeline">
+            <!-- 1. En curso (Morado) -->
+            <div class="edu-item">
+              <div class="edu-status-tag">En Curso</div>
+              <h3 class="edu-title">Programación Web y Administración en Base de Datos</h3>
+              <p class="edu-institution">Centro de Formación Laboral (CFL 404)</p>
+            </div>
+
+            <!-- 2. En curso (Morado) -->
+            <div class="edu-item">
+              <div class="edu-status-tag">En Curso</div>
+              <h3 class="edu-title">Reparación de PC</h3>
+              <p class="edu-institution">Centro de Formación Laboral (CFL 404)</p>
+            </div>
+
+            <!-- 3. Finalizado (Verde) -->
+            <div class="edu-item">
+              <div class="edu-status-tag completed">Finalizado</div>
+              <h3 class="edu-title">Programación IoT (2025)</h3>
+              <p class="edu-detail">Fundamentos básicos de conectividad, lógica de sistemas y automatización básica.</p>
+              <p class="edu-institution">Centro de Formación Laboral (CFL 404)</p>
+            </div>
+
+            <!-- 4. Finalizado (Verde) -->
+            <div class="edu-item">
+              <div class="edu-status-tag completed">Finalizado</div>
+              <h3 class="edu-title">Secundario Completo</h3>
+              <p class="edu-detail">Orientación: Ciencias Naturales</p>
+              <p class="edu-institution">E.E.S. Nº 2 (2020 - 2024)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+    
+    <!-- Footer minimalista y armónico -->
+    <footer class="portfolio-footer">
+      <div class="footer-sparkles">✦ ✦ ✦</div>
+      <p class="footer-text">© 2026 Thiago Quinteros • Diseñado con estética CyberWave</p>
+    </footer>
+
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
