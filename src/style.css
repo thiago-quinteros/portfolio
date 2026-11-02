@@ -581,6 +581,53 @@ body.hud-hidden .hud-toggle-btn {
   text-transform: uppercase;
 }
 
+/* ── Status badge ── */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 99px;
+  background: rgba(0, 255, 200, 0.06);
+  border: 1px solid rgba(0, 255, 200, 0.2);
+  backdrop-filter: blur(4px);
+}
+
+.status-led {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00ffcc;
+  box-shadow: 0 0 6px 1px rgba(0, 255, 200, 0.7);
+  flex-shrink: 0;
+}
+
+/* Anillo de ping que se expande y desvanece */
+.status-led::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: rgba(0, 255, 200, 0.35);
+  animation: led-ping 2.4s ease-out infinite;
+}
+
+@keyframes led-ping {
+  0%   { transform: scale(0.6); opacity: 0.8; }
+  70%  { transform: scale(1.9); opacity: 0; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+
+.status-text {
+  font-family: var(--font-display);
+  font-size: clamp(0.6rem, 1vw, 0.7rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #00ffcc;
+  text-transform: uppercase;
+}
+
 .hero-meta {
   display: flex;
   align-items: center;
