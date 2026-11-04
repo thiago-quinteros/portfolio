@@ -6,8 +6,9 @@
   <title>TQ | Portfolio Profesional</title>
   <meta name="description" content="Portfolio profesional de Thiago Quinteros - Perfil técnico en informática, eficiencia operativa y soporte.">
 
-  <!-- Preload crítico del Preloader SVG para ejecución instantánea sin tirones -->
+  <!-- Preload crítico del Preloader SVG y Video de fondo para ejecución instantánea sin tirones -->
   <link rel="preload" href="/crt-vk2lpc.svg" as="image" type="image/svg+xml" fetchpriority="high">
+  <link rel="preload" href="/preloader-bg.mp4" as="video" type="video/mp4">
 
   <!-- Google Fonts: Syne (Titulares modernos/futuristas) + Plus Jakarta Sans (Cuerpo y detalles legibles) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -93,6 +94,19 @@
 
   <!-- Preloader Futurista: CRT Synthwave / Cyberwave -->
   <aside id="cyber-preloader" class="cyber-preloader" aria-label="Cargando interfaz">
+    <video
+      id="preloader-bg-video"
+      class="preloader-video-bg"
+      autoplay
+      muted
+      playsinline
+      loop
+      preload="auto"
+      aria-hidden="true"
+    >
+      <source src="/preloader-bg.mp4" type="video/mp4" />
+    </video>
+    <div class="preloader-video-overlay" aria-hidden="true"></div>
     <div class="crt-preloader-wrapper">
       <img src="/crt-vk2lpc.svg" alt="Cargando entorno digital" class="crt-svg-display" fetchpriority="high" decoding="sync" />
     </div>

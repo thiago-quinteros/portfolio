@@ -43,6 +43,10 @@ export function initPreloader(onComplete) {
   // Buffer optimizado para el arranque del SVG y hardware acceleration
   requestAnimationFrame(() => {
     preloader.classList.add('preloader-active');
+    const video = preloader.querySelector('.preloader-video-bg');
+    if (video) {
+      video.play().catch(() => {});
+    }
   });
 
   // Duración sincronizada al milisegundo exacto:
