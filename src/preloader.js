@@ -45,15 +45,10 @@ export function initPreloader(onComplete) {
     preloader.classList.add('preloader-active');
   });
 
-  // Duración sincronizada al milisegundo exacto:
-  // El ciclo de la animación CRT es de 6.0s:
-  // - 0s a ~5.0s: Horizonte Synthwave y texto NOW LOADING con escaneo
-  // - 5.0s a ~5.5s: Animación de colapso y apagado CRT (el texto y la pantalla se apagan)
-  // - 5.5s a 5.9s: Queda únicamente el fondo moviéndose sin texto
-  // Cortamos a los 5800ms para que transicione justo cuando la pantalla se apaga y queda el fondo,
-  // antes de que a los 6.0s se reinicie el ciclo del texto.
-  const TOTAL_PRELOADER_DURATION = 5800;
-  const FADE_DURATION = 500;
+  // Duración óptima del nuevo preloader Synthwave:
+  // 2.6s para mostrar la ambientación completa, la barra neón y la transición suave hacia la web
+  const TOTAL_PRELOADER_DURATION = 2600;
+  const FADE_DURATION = 600;
 
   setTimeout(() => {
     // Desvanecer preloader suavemente hasta 0% de opacidad

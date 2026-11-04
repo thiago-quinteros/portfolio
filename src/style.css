@@ -1098,7 +1098,8 @@ html.skip-preloader #cyber-preloader {
   inset: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #07020f;
+  height: 100dvh; /* Soporte móvil dinámico sin recortes por barra de navegación */
+  background-color: #040114;
   z-index: 99999;
   display: flex;
   align-items: center;
@@ -1106,8 +1107,8 @@ html.skip-preloader #cyber-preloader {
   overflow: hidden;
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              visibility 0.5s ease;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.6s ease;
   pointer-events: all;
   user-select: none;
 }
@@ -1119,27 +1120,130 @@ html.skip-preloader #cyber-preloader {
   pointer-events: none;
 }
 
-/* Contenedor adaptativo 100% Responsive manteniendo el aspect ratio nativo 16:9 (800x450) */
-.crt-preloader-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 960px;
-  max-height: 85vh;
-  aspect-ratio: 800 / 450;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.crt-svg-display {
+/* Imagen de fondo Synthwave cubriendo 100% de la pantalla (PC & Móvil) */
+.synthwave-preloader-bg {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  display: block;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  will-change: transform, opacity;
+  background-image: url('/preloader-synthwave.jpg');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  transform: scale(1.04);
+  animation: preloaderZoomIn 3.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  will-change: transform;
+}
+
+@keyframes preloaderZoomIn {
+  0% {
+    transform: scale(1.08);
+    filter: brightness(0.7) contrast(1.15);
+  }
+  100% {
+    transform: scale(1.01);
+    filter: brightness(1) contrast(1.05);
+  }
+}
+
+/* Overlay scanlines y viñeta sutil tipo Cyberpunk */
+.synthwave-preloader-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 35%, rgba(4, 1, 20, 0.65) 100%),
+              linear-gradient(to bottom, rgba(4, 1, 20, 0.25) 0%, transparent 40%, rgba(4, 1, 20, 0.75) 100%);
+  pointer-events: none;
+}
+
+/* HUD futurista inferior */
+.synthwave-preloader-hud {
+  position: absolute;
+  bottom: clamp(1.8rem, 6vh, 4rem);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  z-index: 2;
+  width: min(90vw, 360px);
+  text-align: center;
+}
+
+.synthwave-hud-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0.9rem;
+  background: rgba(8, 2, 24, 0.7);
+  border: 1px solid rgba(0, 255, 200, 0.3);
+  border-radius: 99px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 0 15px rgba(0, 255, 200, 0.15);
+}
+
+.synthwave-hud-led {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00ffcc;
+  box-shadow: 0 0 8px #00ffcc, 0 0 16px rgba(0, 255, 200, 0.6);
+  animation: hudLedPulse 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes hudLedPulse {
+  0% { opacity: 0.4; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1.2); }
+}
+
+.synthwave-hud-text {
+  font-family: var(--font-display, 'Syne', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #00ffcc;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(0, 255, 200, 0.5);
+}
+
+/* Barra de progreso de carga Neón */
+.synthwave-progress-container {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 99px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+.synthwave-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ff007f 0%, #00ffcc 100%);
+  border-radius: 99px;
+  box-shadow: 0 0 10px #ff007f, 0 0 15px #00ffcc;
+  animation: synthwaveProgressFill 2.4s cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes synthwaveProgressFill {
+  0% { width: 0%; }
+  35% { width: 45%; }
+  70% { width: 85%; }
+  100% { width: 100%; }
+}
+
+.synthwave-hud-sub {
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
 /* ==========================================================================
